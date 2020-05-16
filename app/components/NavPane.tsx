@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavPane, NavPaneItem, Text } from 'react-desktop/windows';
 import Home from './Home';
-import Counter from '../containers/CounterPage';
+import WinRate from './Winrate';
 
 export default function Nav() {
   const [selected, setSelected] = useState('Home');
@@ -22,7 +22,7 @@ export default function Nav() {
       case 'Home':
         return <Home />;
       case 'Win Rate':
-        return <Counter />;
+        return <WinRate />;
       default:
         return <Home />;
     }
@@ -34,7 +34,7 @@ export default function Nav() {
         title={title}
         icon={renderIcon(title)}
         theme="theme"
-        background="#ffffff"
+        background="#232c39"
         selected={selected === title}
         onSelect={() => setSelected(title)}
         padding="10px 20px"

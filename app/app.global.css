@@ -6,6 +6,7 @@
 
 body {
   position: relative;
+  height: 100%;
   color: white;
   height: 100vh;
   background-color: #232c39;
@@ -15,7 +16,6 @@ body {
     rgba(0, 1, 127, 0.7)
   ); */
   font-family: Arial, Helvetica, Helvetica Neue, serif;
-  overflow-y: hidden;
 }
 /*
 h2 {
