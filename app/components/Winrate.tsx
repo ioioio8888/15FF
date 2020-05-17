@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -6,7 +6,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import { ProgressCircle } from 'react-desktop/windows';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import routes from '../constants/routes.json';
 
@@ -87,7 +87,7 @@ export default function Winrate(props: any) {
           <ListItemText primary={player.summonerName} />
           <ListItemText
             inset
-            style={{ textAlign: "right" }}
+            style={{ textAlign: 'right' }}
             primary={
               player.scores.kills +
               '/' +
@@ -117,30 +117,14 @@ export default function Winrate(props: any) {
 
   return (
     <>
-      <List
-        component="nav"
-        subheader={
-          <ListSubheader
-            component="div"
-            id="nested-list-subheader"
-            style={{ color: 'white' }}
-          >
-            Your Team
-          </ListSubheader>
-        }
-      >
+      <List component="nav">
+        <ListSubheader style={{ color: 'white' }}>Your Team</ListSubheader>
         {renderPlayerList(allyTeam)}
       </List>
       <List
         component="nav"
         subheader={
-          <ListSubheader
-            component="div"
-            id="nested-list-subheader"
-            style={{ color: 'white' }}
-          >
-            Enemy Team
-          </ListSubheader>
+          <ListSubheader style={{ color: 'white' }}>Enemy Team</ListSubheader>
         }
       >
         {renderPlayerList(enemyTeam)}
