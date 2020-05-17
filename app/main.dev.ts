@@ -100,6 +100,8 @@ const createWindow = async () => {
 /**
  * Add event listeners...
  */
+app.commandLine.appendSwitch('allow-insecure-localhost', 'true');
+app.commandLine.appendSwitch('ignore-certificate-errors', 'true');
 
 app.on('window-all-closed', () => {
   // Respect the OSX convention of having the application in memory even

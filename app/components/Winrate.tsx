@@ -96,7 +96,7 @@ export default function Winrate(props: any) {
               player.scores.assists
             }
             secondary={
-              <Typography component="span" variant="body2" color="white">
+              <Typography component="span" variant="body2" color="inherit">
                 wardScore: {Math.round(player.scores.wardScore)}
               </Typography>
             }
