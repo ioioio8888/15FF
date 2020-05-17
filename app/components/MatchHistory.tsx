@@ -13,7 +13,7 @@ import Divider from '@material-ui/core/Divider';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import { ProgressCircle } from 'react-desktop/windows';
 import { useHistory } from 'react-router-dom';
-import { moment } from 'moment';
+import moment from 'moment';
 import routes from '../constants/routes.json';
 
 export default function MatchHistory(props: any) {
@@ -63,7 +63,6 @@ export default function MatchHistory(props: any) {
     const result = Object.entries(championData.data).filter((champion: any) => {
       return champion[1].key == id;
     });
-    // console.log(result[0][0]);
     return result[0][0];
   }
 
@@ -72,7 +71,6 @@ export default function MatchHistory(props: any) {
       (a, b) => b.gameCreation - a.gameCreation
     );
     return sortedGameHistory.map(game => {
-      // console.log(moment(game.gameCreation))
       return (
         <div key={game.gameId}>
           <ListItem
@@ -110,12 +108,25 @@ export default function MatchHistory(props: any) {
                 </Typography>
               }
             ></ListItemText>
-            {/* <ListItemText>{moment(game.gameCreation)}</ListItemText> */}
+            <ListItemText style={{ textAlign: 'right' }}>
+              {moment(game.gameCreation).format('DD-MM-YYYY')}
+            </ListItemText>
           </ListItem>
           <Divider variant="inset" component="li" />
         </div>
       );
     });
+  }
+
+  function renderWinRate() {
+    const result = gameHistory.filter(game => {
+      return game.participants[0].stats.win;
+    });
+    return <ListItem>
+      <ListItemText>
+        {player+" has a win rate of "+ (result.length/20)*100 +"% from last 20 games! "}
+      </ListItemText>
+    </ListItem>
   }
 
   return (
@@ -149,7 +160,8 @@ export default function MatchHistory(props: any) {
           </ListSubheader>
         }
       >
-        {loading ? <ProgressCircle size={100} /> : renderHistory()}
+        {loading ? <ProgressCircle size={100} /> : renderWinRate()}
+        {loading ? <></> : renderHistory()}
       </List>
     </>
   );

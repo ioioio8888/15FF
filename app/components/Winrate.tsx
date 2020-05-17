@@ -87,7 +87,7 @@ export default function Winrate(props: any) {
           <ListItemText primary={player.summonerName} />
           <ListItemText
             inset
-            style={{ position: 'absolute', right: 50 }}
+            style={{ textAlign: "right" }}
             primary={
               player.scores.kills +
               '/' +
