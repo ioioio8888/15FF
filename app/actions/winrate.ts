@@ -1,36 +1,26 @@
 import { GetState, Dispatch } from '../reducers/types';
 
-export const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
-export const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
+export const SET_ALLY_TEAM = 'SET_ALLY_TEAM';
+export const SET_ENEMY_TEAM = 'SET_ENEMY_TEAM';
+export const SET_IN_GAME = 'SET_IN_GAME';
 
-export function increment() {
+export function setEnemyTeam(Team: Array<any>) {
   return {
-    type: INCREMENT_COUNTER
+    type: SET_ENEMY_TEAM,
+    members: Team
   };
 }
 
-export function decrement() {
+export function setAllyTeam(Team: Array<any>) {
   return {
-    type: DECREMENT_COUNTER
+    type: SET_ALLY_TEAM,
+    members: Team
   };
 }
 
-export function incrementIfOdd() {
-  return (dispatch: Dispatch, getState: GetState) => {
-    const { counter } = getState();
-
-    if (counter % 2 === 0) {
-      return;
-    }
-
-    dispatch(increment());
-  };
-}
-
-export function incrementAsync(delay = 1000) {
-  return (dispatch: Dispatch) => {
-    setTimeout(() => {
-      dispatch(increment());
-    }, delay);
+export function setInGame(inGame: boolean) {
+  return {
+    type: SET_IN_GAME,
+    inGame
   };
 }

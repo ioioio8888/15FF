@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
-import { NavPane, NavPaneItem, Text } from 'react-desktop/windows';
+import { NavPane, NavPaneItem } from 'react-desktop/windows';
 import Home from './Home';
 import WinRate from './Winrate';
 
-export default function Nav() {
+export default function Nav(props: any) {
   const [selected, setSelected] = useState('Home');
+  const {
+    setEnemyTeam,
+    setAllyTeam,
+    setInGame,
+    enemyTeam,
+    allyTeam,
+    inGame
+  } = props;
 
   function renderIcon(title: string) {
     switch (title) {
@@ -22,7 +30,16 @@ export default function Nav() {
       case 'Home':
         return <Home />;
       case 'Win Rate':
-        return <WinRate />;
+        return (
+          <WinRate
+            setAllyTeam={setAllyTeam}
+            setEnemyTeam={setEnemyTeam}
+            setInGame={setInGame}
+            enemyTeam={enemyTeam}
+            allyTeam={allyTeam}
+            inGame={inGame}
+          />
+        );
       default:
         return <Home />;
     }
@@ -33,7 +50,7 @@ export default function Nav() {
       <NavPaneItem
         title={title}
         icon={renderIcon(title)}
-        theme="theme"
+        theme="dark"
         background="#232c39"
         selected={selected === title}
         onSelect={() => setSelected(title)}

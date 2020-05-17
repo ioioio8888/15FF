@@ -7,12 +7,22 @@ import Avatar from '@material-ui/core/Avatar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import { ProgressCircle } from 'react-desktop/windows';
 import { useHistory, Link } from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
 import routes from '../constants/routes.json';
 
-export default function Winrate() {
-  const [allyTeam, setAllyTeam] = useState([]);
-  const [enemyTeam, setEnemyTeam] = useState([]);
-  const [inGame, setInGame] = useState(false);
+export default function Winrate(props: any) {
+  const {
+    setEnemyTeam,
+    setAllyTeam,
+    setInGame,
+    enemyTeam,
+    allyTeam,
+    inGame
+  } = props;
+
+  // const [allyTeam, setAllyTeam] = useState([]);
+  // const [enemyTeam, setEnemyTeam] = useState([]);
+  // const [inGame, setInGame] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -24,16 +34,15 @@ export default function Winrate() {
         })
         .then(data => {
           const summonerName = data.activePlayer.summonerName;
+
           const result = data.allPlayers.filter((player: any) => {
             return player.summonerName === summonerName;
           });
           const team = result[0].team;
-
           const ally = data.allPlayers.filter((player: any) => {
             return player.team === team;
           });
           setAllyTeam(ally);
-
           const enemy = data.allPlayers.filter((player: any) => {
             return player.team !== team;
           });
@@ -42,21 +51,25 @@ export default function Winrate() {
         })
         .catch(err => {
           setInGame(false);
-          // console.log(err);
+          setAllyTeam([]);
+          setEnemyTeam([]);
         });
     }, 5000);
     return () => clearInterval(interval);
   });
 
   function renderPlayerList(players: Array<object>) {
+    if (players === undefined) {
+      return <></>;
+    }
+
     return players.map((player: object) => {
       return (
         <ListItem
           button
           key={player.summonerName}
           onClick={() => {
-            console.log(history);
-            history.push(routes.COUNTER);
+            history.push({ pathname: routes.MATCHHISTORY, search:"", state: { player: player.summonerName }});
           }}
         >
           <ListItemAvatar>
@@ -73,6 +86,22 @@ export default function Winrate() {
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary={player.summonerName} />
+          <ListItemText
+            inset
+            style={{ position: 'absolute', right: 50 }}
+            primary={
+              player.scores.kills +
+              '/' +
+              player.scores.deaths +
+              '/' +
+              player.scores.assists
+            }
+            secondary={
+              <Typography component="span" variant="body2" color="white">
+                wardScore: {Math.round(player.scores.wardScore)}
+              </Typography>
+            }
+          ></ListItemText>
         </ListItem>
       );
     });
@@ -89,7 +118,6 @@ export default function Winrate() {
 
   return (
     <>
-    <Link to={routes.MATCHHISTORY}>123123</Link>
       <List
         component="nav"
         subheader={

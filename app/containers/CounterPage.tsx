@@ -7,11 +7,12 @@ import {
   incrementIfOdd,
   incrementAsync
 } from '../actions/counter';
-import { counterStateType } from '../reducers/types';
+import { stateType } from '../reducers/types';
 
-function mapStateToProps(state: counterStateType) {
+function mapStateToProps(state: stateType) {
   return {
-    counter: state.counter
+    enemyTeam: state.enemyTeam,
+    allyTeam: state.allyTeam
   };
 }
 
