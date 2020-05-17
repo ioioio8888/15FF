@@ -11,6 +11,7 @@
 import path from 'path';
 import { app, BrowserWindow } from 'electron';
 import { autoUpdater } from 'electron-updater';
+import debug from 'electron-debug';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 
@@ -53,7 +54,10 @@ const createWindow = async () => {
   ) {
     await installExtensions();
   }
-
+  debug({
+    isEnabled: true,
+    showDevTools: false
+    });
   mainWindow = new BrowserWindow({
     show: false,
     width: 1024,
