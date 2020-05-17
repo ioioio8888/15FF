@@ -34,7 +34,6 @@ export default function Winrate(props: any) {
         })
         .then(data => {
           const summonerName = data.activePlayer.summonerName;
-
           const result = data.allPlayers.filter((player: any) => {
             return player.summonerName === summonerName;
           });
@@ -56,20 +55,20 @@ export default function Winrate(props: any) {
         });
     }, 5000);
     return () => clearInterval(interval);
-  });
+  }, []);
 
   function renderPlayerList(players: Array<object>) {
-    if (players === undefined) {
-      return <></>;
-    }
-
     return players.map((player: object) => {
       return (
         <ListItem
           button
           key={player.summonerName}
           onClick={() => {
-            history.push({ pathname: routes.MATCHHISTORY, search:"", state: { player: player.summonerName }});
+            history.push({
+              pathname: routes.MATCHHISTORY,
+              search: '',
+              state: { player: player.summonerName }
+            });
           }}
         >
           <ListItemAvatar>
