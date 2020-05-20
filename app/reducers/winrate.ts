@@ -1,9 +1,15 @@
 import { Action } from 'redux';
-import { SET_ALLY_TEAM, SET_ENEMY_TEAM, SET_IN_GAME } from '../actions/winrate';
+import {
+  SET_ALLY_TEAM,
+  SET_ENEMY_TEAM,
+  SET_IN_GAME,
+  SET_WIN_RATE
+} from '../actions/winrate';
 
 const initialState = {
   allyTeam: [],
   enemyTeam: [],
+  winRate: [],
   inGame: false
 };
 
@@ -18,6 +24,11 @@ export default function counter(state = initialState, action: Action<any>) {
       return {
         ...state,
         allyTeam: action.members
+      };
+    case SET_WIN_RATE:
+      return {
+        ...state,
+        winRate: action.winRate
       };
     case SET_IN_GAME:
       return {

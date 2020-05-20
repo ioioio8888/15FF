@@ -4,14 +4,18 @@ import Home from './Home';
 import WinRate from './Winrate';
 
 export default function Nav(props: any) {
-  const [selected, setSelected] = useState('Home');
+
   const {
     setEnemyTeam,
     setAllyTeam,
     setInGame,
+    setMainTab,
+    setWinRate,
     enemyTeam,
     allyTeam,
-    inGame
+    inGame,
+    winRate,
+    tab
   } = props;
 
   function renderIcon(title: string) {
@@ -35,7 +39,9 @@ export default function Nav(props: any) {
             setAllyTeam={setAllyTeam}
             setEnemyTeam={setEnemyTeam}
             setInGame={setInGame}
+            setWinRate={setWinRate}
             enemyTeam={enemyTeam}
+            winRate={winRate}
             allyTeam={allyTeam}
             inGame={inGame}
           />
@@ -52,8 +58,8 @@ export default function Nav(props: any) {
         icon={renderIcon(title)}
         theme="dark"
         background="#232c39"
-        selected={selected === title}
-        onSelect={() => setSelected(title)}
+        selected={tab === title}
+        onSelect={() => setMainTab(title)}
         padding="10px 20px"
         push
       >

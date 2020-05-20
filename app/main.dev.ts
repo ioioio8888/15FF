@@ -57,7 +57,7 @@ const createWindow = async () => {
   debug({
     isEnabled: true,
     showDevTools: false
-    });
+  });
   mainWindow = new BrowserWindow({
     show: false,
     width: 1024,

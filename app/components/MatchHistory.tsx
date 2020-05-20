@@ -122,11 +122,16 @@ export default function MatchHistory(props: any) {
     const result = gameHistory.filter(game => {
       return game.participants[0].stats.win;
     });
-    return <ListItem>
-      <ListItemText>
-        {player+" has a win rate of "+ (result.length/20)*100 +"% from last 20 games! "}
-      </ListItemText>
-    </ListItem>
+    return (
+      <ListItem>
+        <ListItemText>
+          {player +
+            ' has a win rate of ' +
+            parseInt((result.length / gameHistory.length) * 100) +
+            '% from last 20 games! '}
+        </ListItemText>
+      </ListItem>
+    );
   }
 
   return (

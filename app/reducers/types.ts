@@ -5,6 +5,7 @@ export type stateType = {
   allyTeam: Array<any>;
   enemyTeam: Array<any>;
   inGame: boolean;
+  tab: string;
 };
 
 export type GetState = () => stateType;
